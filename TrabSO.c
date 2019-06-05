@@ -81,7 +81,7 @@ int main (){
 	rename("diag1.txt", NomeArq);
 
 	 for(i=0;i<N;i++){
-        for(j=0;j<10;j++){
+        for(j=0;j<N;j++){
 
             fscanf(diag1,"%lf",&A[i][j]);
 
