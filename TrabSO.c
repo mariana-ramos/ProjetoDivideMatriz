@@ -71,36 +71,32 @@ int main (){
 	pthread_t threads[T];
 	int i,j;
 	int arg[T];
-	FILE *diag1;
+	FILE *Arq;
 
 
 	scanf("%d %d %s",&N, &T, NomeArq); // entrada das dimensões das matrizes, o numero de threads e do arquivo.
 
-	diag1 = fopen("diag1.txt","r");
+	Arq = fopen(NomeArq,"r");
 
-	rename("diag1.txt", NomeArq);
+
 
 	 for(i=0;i<N;i++){
         for(j=0;j<N;j++){
 
-            fscanf(diag1,"%lf",&A[i][j]);
+            fscanf(Arq,"%lf",&A[i][j]);
 
             }
 	 }
 
-	for (i=0; i<T;i++){
+	 fclose(Arq);
+
+	for (int i=0; i<T;i++){
 		arg[i]=i+1;
 		pthread_create(&threads[i], NULL,Div1,(void*)&arg[i]);
-		pthread_create(&threads[i], NULL,Div2,(void*)&arg[i]);
+		//pthread_create(&threads[i], NULL,Div2,(void*)&arg[i]);
 		pthread_join(threads[i],NULL);
 	}
 	printf("\n");
 
 return 0;
 }
-
-
-
-
-
-
