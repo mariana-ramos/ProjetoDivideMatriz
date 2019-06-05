@@ -4,7 +4,6 @@
 #define MAX 1000
 /*-------------------------------------------------------------------------------------------*/
 double A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
-int NumThread;
 int N; // dimensões da matriz
 int T; // Numero de threads
 char NomeArq[100];// nome do arquivo
@@ -69,9 +68,9 @@ void GravaMatriznoArquivo(){
 }
 
 int main (){
-	pthread_t threads[NumThread];
+	pthread_t threads[T];
 	int i,j;
-	int arg[NumThread];
+	int arg[T];
 	FILE *diag1;
 
 
@@ -99,10 +98,6 @@ int main (){
 
 return 0;
 }
-
-
-
-
 
 
 
