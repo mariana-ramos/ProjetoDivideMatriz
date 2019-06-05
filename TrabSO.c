@@ -59,7 +59,7 @@ void GravaMatriznoArquivo(){
 
     for(int i = 0; i<N; i++){
         for (int j = 0; j<N; j++){
-                fprintf(saida1,"%lf",C[i][j]);
+                fprintf(saida2,"%lf",C[i][j]);
         }
     }
 
