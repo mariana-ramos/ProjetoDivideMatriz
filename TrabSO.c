@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 #define MAX 1000
-/*-------------------------------------------------------------------------------------------*/
+
+/*----------------------------VARIÁVEIS GLOBAIS------------------------------------------------*/
 double A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
 int N; // dimensões da matriz
 int T; // Numero de threads
@@ -23,7 +24,8 @@ void *Div1(void *arg){  // Divide a matriz A e coloca a diagonal principal e aci
             }
 
         }
-    }
+    } 
+printf("B existe\n");
 }
 
 void *Div2(void *arg){  // Divide a matriz a e coloca a diagonal principal e abaixo na matriz C;
@@ -39,14 +41,14 @@ void *Div2(void *arg){  // Divide a matriz a e coloca a diagonal principal e aba
 
         }
     }
-
+printf("C existe\n");
 }
 
 void GravaMatriznoArquivo(){
     FILE *saida1;
     FILE *saida2;
 
-    saida1 = fopen("diag1.txt","w");
+    saida1 = fopen("AAAA.txt","w");
 
     for(int i = 0; i<N; i++){
         for (int j = 0; j<N; j++){
@@ -54,7 +56,7 @@ void GravaMatriznoArquivo(){
         }
     }
 
-    saida2 = fopen("diag2.txt","w");
+    saida2 = fopen("BBBB.txt","w");
 
     for(int i = 0; i<N; i++){
         for (int j = 0; j<N; j++){
@@ -62,7 +64,7 @@ void GravaMatriznoArquivo(){
         }
     }
 
-
+printf("Arquivos gravados se Deus quiser\n");
 
 
 }
@@ -79,23 +81,29 @@ int main (){
 	Arq = fopen(NomeArq,"r");
 
 
-
-	 for(i=0;i<N;i++){
+	if(Arq == NULL){
+		printf("Erro de Leitura de Arquivo\n");
+	}
+else{
+	for(i=0;i<N;i++){
         for(j=0;j<N;j++){
 
             fscanf(Arq,"%lf",&A[i][j]);
 
             }
 	 }
-
+}
+		
 	 fclose(Arq);
 
-	for (int i=0; i<T;i++){
+	for (int i=0; i<T/2;i++){// Laço para criar as threads e chamar a função Div1
 		arg[i]=i+1;
 		pthread_create(&threads[i], NULL,Div1,(void*)&arg[i]);
-		//pthread_create(&threads[i], NULL,Div2,(void*)&arg[i]);
+		pthread_create(&threads[i], NULL,Div2,(void*)&arg[i]);
 		pthread_join(threads[i],NULL);
 	}
+	
+	GravaMatriznoArquivo();//Chama a função que faz a saída.
 	printf("\n");
 
 return 0;
