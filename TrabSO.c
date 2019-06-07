@@ -1,3 +1,10 @@
+/* 		Mariana Ramos dos Santos	221887
+		Leonardo Polizel Martins	
+
+*/
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -137,7 +144,7 @@ for (i=0; i<N; i++)
 		pthread_create(&threads[i], NULL,Div2,(void*)&arg[i]);
 	}
 	
-	for (int i=0; i<T;i++){// Laço para criar as threads e chamar as funções de divisão
+	for (int i=0; i<T;i++){
 		pthread_join(threads[i],NULL);
 	}
 	printf("\nFuncao executou em %f segundos\n", ((double)clock() - ini) / CLOCKS_PER_SEC);
